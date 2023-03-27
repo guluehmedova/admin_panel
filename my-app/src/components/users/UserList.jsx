@@ -20,7 +20,6 @@ const UserList = () => {
   const { loading } = useSelector((state) => ({ ...state.user }));
 
   const role = JSON.parse(localStorage.getItem('role'));
-  console.log(role);
 
   useEffect(() => {
     dispatch(getUsers());

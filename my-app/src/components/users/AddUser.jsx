@@ -8,7 +8,7 @@ const AddUser = () => {
     username: '',
     password: '',
     role: 'User'
-  })
+  });
 
   const { users } = useSelector((state) => (state.user));
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const AddUser = () => {
   useEffect(() => {
     if (id) {
       const singleUser = users.find((user) => user.id === id);
-      console.log("singleUser: ", singleUser);
       setUserData({ ...singleUser });
     }
   }, [id]);
@@ -29,7 +28,7 @@ const AddUser = () => {
     if (!id) {
       await dispatch(addData({ username: userData.username, password: userData.password, role: userData.role, accessToken: token }));
     } else {
-      await dispatch(updateData(id, userData))
+      await dispatch(updateData({id: id,userData: userData}));
     }
     handleClear();
     navigate('/users');
@@ -61,7 +60,7 @@ const AddUser = () => {
         <Link className='go-back-btn' to="/users">Go Back</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddUser
+export default AddUser;

@@ -21,8 +21,9 @@ export const deleteData = createAsyncThunk('userCrud/deleteData', async (id) => 
     return response.data;
 });
 
-export const updateData = createAsyncThunk('userCrud/updateData', async (id, user ) => {
-    const response = await axios.put(`users/${id}`, user);
+export const updateData = createAsyncThunk('userCrud/updateData', async ({id, userData}) => {
+    const response = await axios.put(`users/${id}`, userData);
+    console.log("updateData response: ", userData.username);
     return response.data;
 });
 

@@ -1,14 +1,21 @@
 import { NavLink } from "react-router-dom";
 import navLinks from "../../assets/dummy-data/navLinks";
-import "../Sidebar/sidebar.css"
+import "../Sidebar/sidebar.css";
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("role");
+    navigate('/login');
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__top">
         <h2><span><i className='ri-taxi-line'></i></span> UberX</h2>
       </div>
-
       <div className="sidebar__content">
         <div className="menu">
           <ul className='nav__list'>
@@ -26,7 +33,7 @@ const Sidebar = () => {
         </div>
 
         <div className="sidebar__buttom">
-          <button><i className="ri-logout-circle-r-line"></i>Logout</button>
+          <button onClick={logout}><i className="ri-logout-circle-r-line"></i>Logout</button>
         </div>
       </div>
     </div>

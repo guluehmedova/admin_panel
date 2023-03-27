@@ -53,7 +53,7 @@ const UserList = () => {
                     <th>Username</th>
                     <th>Password</th>
                     <th>Role</th>
-                    <th>Actions</th>
+                    {role !== roles.User && <th>Actions</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -63,14 +63,16 @@ const UserList = () => {
                       <td>{user.username}</td>
                       <td>{user.password}</td>
                       <td>{user.role}</td>
-                      <td>
-                        <div className="actions">
-                          {role === roles.SuperAdmin && <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>}
-                          {role === roles.SuperAdmin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                          {role === roles.Editor && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                          {role === roles.Admin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                        </div>
-                      </td>
+                      {
+                        role !== roles.User && <td>
+                          <div className="actions">
+                            {role === roles.SuperAdmin && <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>}
+                            {role === roles.SuperAdmin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
+                            {role === roles.Editor && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
+                            {role === roles.Admin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
+                          </div>
+                        </td>
+                      }
                     </tr>
                   ))}
                 </tbody>

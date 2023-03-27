@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+:root {
+  --primary-color: #181b3a;
+  --secondary-color: #01d293;
+  --body-bg: #0b0c28;
+  --card-01-bg: linear-gradient(#ef621c, #e1424e);
+  --card-02-bg: linear-gradient(#01d293, #56c57a);
+  --card-03-bg: #725cff;
+  --card-04-bg: #2884ff;
+  --heading-color: #fff;
+  --small-text-color: #808191;
+  --recommend-car01-bg: #e1dfa4;
+  --recommend-car02-bg: #e3ecf1;
+  --recommend-car03-bg: #f4e3e5;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--body-bg);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-emphasis: none;
+  color: unset;
+}
+
+.main__layout {
+  margin-left: 270px;
+}
+img {
+  width: 100%;
+}
+
+.error {
+  color: rgb(238, 41, 41);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  font-weight: 500;
+}

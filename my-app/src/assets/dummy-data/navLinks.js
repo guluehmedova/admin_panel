@@ -1,6 +1,6 @@
 const navLinks = [
   {
-    path: "/dashboard",
+    path: "/",
     icon: "ri-apps-2-line",
     display: "Dashboard",
   },
@@ -8,6 +8,11 @@ const navLinks = [
     path: "/users",
     icon: "ri-user-2-line",
     display: "Users",
+  },
+  {
+    path: "/roles",
+    icon: "ri-star-line",
+    display: "Roles",
   },
   {
     path: "/cars",
@@ -28,7 +33,7 @@ const navLinks = [
     path: "/settings",
     icon: "ri-settings-2-line",
     display: "Settings",
-  },
+  }
 ];
 
 export default navLinks;

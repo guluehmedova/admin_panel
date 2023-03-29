@@ -4,13 +4,7 @@ import { getUsers, deleteData } from '../../redux/features/crud/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
-
-const roles = {
-  SuperAdmin: "Super Admin",
-  Admin: "Admin",
-  Editor: "Editor",
-  User: "User"
-}
+import { roles } from '../../api/roles';
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -18,8 +12,6 @@ const UserList = () => {
 
   const { users } = useSelector((state) => ({ ...state.user }));
   const { loading } = useSelector((state) => ({ ...state.user }));
-
-  const role = JSON.parse(localStorage.getItem('role'));
 
   useEffect(() => {
     dispatch(getUsers());
@@ -30,6 +22,7 @@ const UserList = () => {
       dispatch(deleteData(id));
     }
   }
+
 
   return (
     <div className='container'>
@@ -44,8 +37,7 @@ const UserList = () => {
             :
             <>
               <h3 className='title'>User List</h3>
-              {role === roles.Admin && <Link to='/addUser' className='create-btn'>Create</Link>}
-              {role === roles.SuperAdmin && <Link to='/addUser' className='create-btn'>Create</Link>}
+              <Link to='/addUser' className='create-btn'>Create</Link>
               <table>
                 <thead>
                   <tr>
@@ -53,26 +45,24 @@ const UserList = () => {
                     <th>Username</th>
                     <th>Password</th>
                     <th>Role</th>
-                    {role !== roles.User && <th>Actions</th>}
+                    <th>Permmissions</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users && users.map((user, i) => (
-                    user.role !== "Super Admin" && <tr key={i}>
+                    <tr key={i}>
                       <td>{no++}</td>
                       <td>{user.username}</td>
                       <td>{user.password}</td>
                       <td>{user.role}</td>
-                      {
-                        role !== roles.User && <td>
-                          <div className="actions">
-                            {role === roles.SuperAdmin && <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>}
-                            {role === roles.SuperAdmin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                            {role === roles.Editor && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                            {role === roles.Admin && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
-                          </div>
-                        </td>
-                      }
+                      <td>{user.permmissions.map((item) => item + ', ')}</td>
+                      <td>
+                        <div className="actions">
+                          <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>
+                          <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import navLinks from "../../assets/dummy-data/navLinks";
 import "../Sidebar/sidebar.css";
 import { useNavigate } from 'react-router-dom';
+import routes from "../../routesList";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Sidebar = () => {
     localStorage.removeItem("role");
     navigate('/login');
   };
+
+  const userPermissions = JSON.parse(localStorage.getItem('permmissions'));
 
   return (
     <div className="sidebar">
@@ -20,18 +23,20 @@ const Sidebar = () => {
         <div className="menu">
           <ul className='nav__list'>
             {
-              navLinks.map((item, index) => (
-                <li key={index} className="nav__item">
-                  <NavLink to={item.path} className={(navClass) => navClass.isActive ? "nav__active nav__link" : "nav__link"}>
-                    <i className={item.icon}></i>
-                    {item.display}
-                  </NavLink>
-                </li>
-              ))
+              routes.map((route, index) => {
+                if (userPermissions.includes(route?.permissions) || route?.permissions === "all") {
+                  return (
+                    <li key={index} className="nav__item">
+                      <NavLink to={route.path} className={(navClass) => navClass.isActive ? "nav__active nav__link" : "nav__link"}>
+                        {route.permissions !== "addUser" && route.permissions !== "editUser" &&  route.name}
+                      </NavLink>
+                    </li>
+                  )
+                }
+              })
             }
           </ul>
         </div>
-
         <div className="sidebar__buttom">
           <button onClick={logout}><i className="ri-logout-circle-r-line"></i>Logout</button>
         </div>

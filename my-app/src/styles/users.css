@@ -57,14 +57,14 @@ tr:nth-child(even) {
     background-color: rgb(2, 167, 85);
     transition: all .5s ease-in-out;
 }
-.user-list .actions{
+.actions{
     display: flex;
     justify-content: center;
     margin: 0.1rem 0;
     gap: 1rem;
     align-items: center;
 }
-.user-list .edit-btn{
+.edit-btn{
     border: 2px solid var(--recommend-car01-bg);
     text-align: center;
     border-radius: 5px;
@@ -74,11 +74,11 @@ tr:nth-child(even) {
     font-weight: 800;
     padding: 0.5rem;
 }
-.user-list .delete-btn:hover,.edit-btn:hover{
+.delete-btn:hover,.edit-btn:hover{
     color: white;
     transition: all .5s ease-in-out;
 }
-.user-list .delete-btn{
+ .delete-btn{
     border: 2px solid var(--recommend-car01-bg);
     text-align: center;
     color: whitesmoke;
@@ -163,3 +163,4 @@ tr:nth-child(even) {
     background-color: rgb(2, 167, 85);
     transition: all .5s ease-in-out;
 }
+

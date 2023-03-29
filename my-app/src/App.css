@@ -46,3 +46,25 @@ img {
   margin-top: 2rem;
   font-weight: 500;
 }
+option{
+  background-color: #0b0c28;
+  color: whitesmoke;
+  margin: .2rem 0;
+  padding: .5rem;
+  font-size: 1.5rem;
+}
+select{
+  background-color: #181b3a;
+}
+.lab{
+  font-size: 1.5rem;
+  color: whitesmoke;
+}
+.per{
+  display: flex;
+  align-items: center;
+}
+.form-check-input{
+  width: 10rem;
+  background-color: white;
+}

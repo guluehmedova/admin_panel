@@ -1,4 +1,4 @@
-import { Layout } from "./components/index";
+import { AddUser, Layout, UserList } from "./components/index";
 import { Login } from "./pages";
 import { Routes, Route } from 'react-router-dom';
 import PrivateRoutes from "./utils/PrivateRoutes";

@@ -6,3 +6,4 @@ export { default as SingleCard } from './reuseable/SingleCard';
 export { default as RecommendCarCard } from './reuseable/RecommendCarCard';
 export { default as UserList } from './users/UserList';
 export { default as AddUser } from './users/AddUser';
+export { default as RoleList } from './roles/RoleList';

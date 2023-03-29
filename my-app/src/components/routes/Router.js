@@ -1,21 +1,17 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Bookings, Dashboard, SellCar, Settings } from '../../pages/index';
-import { UserList, AddUser } from '../index';
+import { Routes, Route } from 'react-router-dom';
+import routes from '../../routesList';
 
 const Router = () => {
+    const userPermissions = JSON.parse(localStorage.getItem('permmissions'));
+
     return (
         <Routes>
-            <Route path='/' element={<Navigate to="/dashboard" element={<Dashboard />} />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/bookings' element={<Bookings />} />
-            <Route path='/sell-car' element={<SellCar />} />
-            <Route path='/settings' element={<Settings />} />
-
-
-            {/* CRUD PAGES */}
-            <Route path='/users' exact element={<UserList />} />
-            <Route path='/addUser' element={<AddUser />} />
-            <Route path='/editUser/:id' element={<AddUser />} />
+            {routes.map(route => {
+                if (userPermissions.includes(route?.permissions) || route?.permissions === "all") {
+                    return <Route exact={route?.exact} path={route?.path} element={route?.element}
+                    />
+                }
+            })}
         </Routes>
     )
 }

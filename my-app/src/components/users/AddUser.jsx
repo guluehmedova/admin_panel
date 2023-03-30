@@ -58,13 +58,13 @@ const AddUser = () => {
     }
   };
 
-
   const checkboxsElement = allPermissions.map((item, index) => {
     return (
-      <div key={item} className="per">
+      item !== 'all' && <div key={index} className="per">
         <input
           className="form-check-input"
           type="checkbox"
+          value={item}
           checked={userData.permmissions.some(p => p === item)}
           name="permmissions"
           id="flexCheckDefault"

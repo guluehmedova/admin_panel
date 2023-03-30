@@ -6,7 +6,7 @@
     left: 0%;
     z-index: 990;
     background-color: var(--primary-color);
-    padding:0 30px;
+    padding: 0 30px;
 }
 
 .sidebar__top {
@@ -50,30 +50,33 @@
 .sidebar__buttom {
     height: 20%;
 }
-.nav__link, .sidebar__buttom button{
+.nav__link,
+.sidebar__buttom button {
     display: flex;
     text-decoration: none;
     align-items: center;
     column-gap: 5px;
 }
-.sidebar__buttom button{
+.sidebar__buttom button {
     color: var(--small-text-color);
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-.nav__list{
+.nav__list {
     display: flex;
     row-gap: 1.3rem;
     flex-direction: column;
     color: var(--small-text-color);
 }
-.nav__link i{
+.nav__link {
+    padding: 6px 0;
+}
+.nav__link i {
     color: var(--secondary-color);
 }
-.nav__active{
+.nav__active {
     color: white;
     background-color: #b7ffe913;
-    padding: 6px;
     border-radius: 5px;
 }

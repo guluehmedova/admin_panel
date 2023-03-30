@@ -23,6 +23,8 @@ const UserList = () => {
     }
   }
 
+  const userPermissions = JSON.parse(localStorage.getItem('permmissions'));
+  const role = JSON.parse(localStorage.getItem('role'));
 
   return (
     <div className='container'>
@@ -37,7 +39,7 @@ const UserList = () => {
             :
             <>
               <h3 className='title'>User List</h3>
-              <Link to='/addUser' className='create-btn'>Create</Link>
+              {userPermissions.includes("addUser") && <Link to='/addUser' className='create-btn'>Create</Link>}
               <table>
                 <thead>
                   <tr>
@@ -46,7 +48,7 @@ const UserList = () => {
                     <th>Password</th>
                     <th>Role</th>
                     <th>Permmissions</th>
-                    <th>Actions</th>
+                    {role !== 'User' && <th>Actions</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -56,13 +58,15 @@ const UserList = () => {
                       <td>{user.username}</td>
                       <td>{user.password}</td>
                       <td>{user.role}</td>
-                      <td>{user.permmissions.map((item) => item + ', ')}</td>
-                      <td>
-                        <div className="actions">
-                          <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>
-                          <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>
-                        </div>
-                      </td>
+                      <td>{user.permmissions?.map((item) => item !== '/' && item + ', ')}</td>
+                      {
+                        role !== 'User' && <td>
+                          <div className="actions">
+                            <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>
+                            {userPermissions?.includes("editUser") && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
+                          </div>
+                        </td>
+                      }
                     </tr>
                   ))}
                 </tbody>

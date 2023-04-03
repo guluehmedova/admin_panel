@@ -21,7 +21,7 @@ const RoleList = () => {
   return (
     <div className='container'>
       <div className="role-list">
-        <h1>Role List</h1>
+      <h3 className='title'>Role List</h3>
         <Link to='/addRole' className='create-btn'>Create</Link>
         <table>
           <thead>

@@ -3,6 +3,8 @@ import profileImg from '../../assets/images/profile-02.png';
 import '../TopNav/topNav.css';
 
 const TopNav = () => {
+  const role = JSON.parse(localStorage.getItem('role'));
+
   return (
     <div className="top__nav">
       <div className="top__nav-wrapper">
@@ -15,6 +17,7 @@ const TopNav = () => {
             <i className='ri-notification-3-line'></i>
             <span className='badge'>1</span>
           </span>
+          <h6 className='role'>{role}</h6>
           <div className="profile">
             <Link to="/settings">
               <img src={profileImg} alt="" />

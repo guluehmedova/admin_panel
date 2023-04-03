@@ -77,7 +77,7 @@ const AddEditRole = () => {
   return (
     <div className='container'>
       <div className="create-form-box">
-        <h3 className='stats__title'>{id ? "Edit User Page" : "Create User Page"}</h3>
+        <h3 className='stats__title'>{id ? "Edit Role Page" : "Create Role Page"}</h3>
         <form onSubmit={handleSubmit}>
           <input type="text" name='name' placeholder='Role Name' className='role-name' value={roleData.name} onChange={onInputChange} />
           {checkboxsElement}

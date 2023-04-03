@@ -185,3 +185,7 @@ tr:nth-child(even) {
     margin-bottom: 2rem;
     font-weight: 900;
 }
+
+.title{
+    color: whitesmoke;
+}

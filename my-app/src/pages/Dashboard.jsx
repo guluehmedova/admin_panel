@@ -29,6 +29,7 @@ const cardObj = [
 const Dashboard = () => {
   return (
     <div className="container">
+      <div className="row">
       <div className="dashboard__wrapper">
         <div className="dashboard__cards">
           <SingleCard item={cardObj[0]} />
@@ -54,6 +55,7 @@ const Dashboard = () => {
             recommendCarsData.map((car, index) => <RecommendCarCard item={car} key={index} />)
           }
         </div>
+      </div>
       </div>
     </div>
   )

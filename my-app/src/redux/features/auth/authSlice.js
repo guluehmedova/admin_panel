@@ -5,7 +5,6 @@ export const login = createAsyncThunk('auth/login', async (username, password) =
     const response = await axios.get(`users?username=${username}&password=${password}`);
     localStorage.setItem("accessToken",JSON.stringify(response.data[0].accessToken));
     localStorage.setItem("role",JSON.stringify(response.data[0].role));
-    localStorage.setItem("permmissions",JSON.stringify(response.data[0].permmissions));
     return response.data;
 });
 

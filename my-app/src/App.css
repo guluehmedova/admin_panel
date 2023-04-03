@@ -68,3 +68,6 @@ select{
   width: 10rem;
   background-color: white;
 }
+.role-name{
+  text-transform: capitalize;
+}

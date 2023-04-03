@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { addData, updateData } from '../../redux/features/crud/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { allPermissions } from "../../api/permissions";
+import { getRoles } from '../../redux/features/crud/roleSlice';
 
 const AddUser = () => {
   const [userData, setUserData] = useState({
     username: '',
     password: '',
     role: 'User',
-    permmissions: []
   });
 
   const { users } = useSelector((state) => (state.user));
+  const { roles } = useSelector((state) => (state.role));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -28,7 +28,7 @@ const AddUser = () => {
     const token = Math.random().toString(36).substr(2);
     e.preventDefault();
     if (!id) {
-      await dispatch(addData({ username: userData.username, password: userData.password, role: userData.role, permmissions: userData.permmissions, accessToken: token }));
+      await dispatch(addData({ username: userData.username, password: userData.password, role: userData.role, accessToken: token }));
     } else {
       await dispatch(updateData({ id: id, userData: userData }));
     }
@@ -45,38 +45,9 @@ const AddUser = () => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const onCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    const { permmissions } = userData;
-    console.log(`${value} is ${checked}`);
-
-    if (checked) {
-      setUserData({ ...userData, permmissions: [...permmissions, value] });
-    }
-    else {
-      setUserData({ ...userData, permmissions: permmissions.filter((e) => e !== value) });
-    }
-  };
-
-  const checkboxsElement = allPermissions.map((item, index) => {
-    return (
-      item !== 'all' && <div key={index} className="per">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={item}
-          checked={userData.permmissions.some(p => p === item)}
-          name="permmissions"
-          id="flexCheckDefault"
-          onChange={onCheckboxChange}
-        />
-        <label
-          className="lab"
-          htmlFor="flexCheckDefault"
-        >{item}</label>
-      </div>
-    );
-  })
+  useEffect(() => {
+    dispatch(getRoles());
+  }, [dispatch]);
 
   return (
     <div className='container'>
@@ -86,11 +57,12 @@ const AddUser = () => {
           <input type="text" name='username' value={userData.username} onChange={onInputChange} placeholder='Username' required />
           <input type="text" name='password' value={userData.password} onChange={onInputChange} placeholder='Password' required />
           <select className='roles' name="role" value={userData.role} onChange={onInputChange}>
-            <option>User</option>
-            <option>Editor</option>
-            <option>Admin</option>
+            {roles &&
+              roles.map((item, index) => (
+                <option key={index}>{item.name}</option>
+              ))
+            }
           </select>
-          {checkboxsElement}
           <button type='submit'>Save</button>
         </form>
         <Link className='go-back-btn' to="/users">Go Back</Link>

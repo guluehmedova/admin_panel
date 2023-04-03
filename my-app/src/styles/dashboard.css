@@ -130,3 +130,7 @@
     margin-top: 2rem;
     column-gap: 2rem;
 }
+
+.recommend__car-img img{
+    filter: contrast(150%);
+}

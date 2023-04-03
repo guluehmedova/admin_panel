@@ -4,7 +4,6 @@ import { getUsers, deleteData } from '../../redux/features/crud/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
-import { roles } from '../../api/roles';
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const UserList = () => {
             :
             <>
               <h3 className='title'>User List</h3>
-              {userPermissions.includes("addUser") && <Link to='/addUser' className='create-btn'>Create</Link>}
+              <Link to='/addUser' className='create-btn'>Create</Link>
               <table>
                 <thead>
                   <tr>
@@ -47,8 +46,7 @@ const UserList = () => {
                     <th>Username</th>
                     <th>Password</th>
                     <th>Role</th>
-                    <th>Permmissions</th>
-                    {role !== 'User' && <th>Actions</th>}
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,12 +56,11 @@ const UserList = () => {
                       <td>{user.username}</td>
                       <td>{user.password}</td>
                       <td>{user.role}</td>
-                      <td>{user.permmissions?.map((item) => item !== '/' && item + ', ')}</td>
                       {
-                        role !== 'User' && <td>
+                        <td>
                           <div className="actions">
                             <button className='delete-btn' onClick={() => handleDelete(user.id)}>Delete</button>
-                            {userPermissions?.includes("editUser") && <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>}
+                            <Link className='edit-btn' to={`/editUser/${user.id}`}>Edit</Link>
                           </div>
                         </td>
                       }

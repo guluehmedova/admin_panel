@@ -54,6 +54,7 @@
     align-items: center;
     justify-content: flex-end;
     object-fit: cover;
+    filter: contrast(150%);
 }
 
 .notification i {

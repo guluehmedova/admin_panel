@@ -1,68 +1,49 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../../../api/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
-export const getUsers = createAsyncThunk('userCrud/getUsers', async () => {
-    const response = await axios.get('users');
+const BASE_URL = 'https://642a890bb11efeb7599b9a1d.mockapi.io/roles';
+
+export const getRoles = createAsyncThunk("roleCrud/getRoles", async () => {
+    const response = await axios.get(BASE_URL);
     return response.data;
 });
 
-export const getUserById = createAsyncThunk('userCrud/getUserById', async (id) => {
-    const response = await axios.get(`users/${id}`);
+export const addData = createAsyncThunk('roleCrud/addData', async (newData) => {
+    const response = await axios.post(BASE_URL, newData);
     return response.data;
 });
 
-export const addData = createAsyncThunk('userCrud/addData', async (newData) => {
-    const response = await axios.post('users', newData);
+export const deleteData = createAsyncThunk('roleCrud/deleteData', async (id) => {
+    const response = await axios.delete(`${BASE_URL}/${id}`);
     return response.data;
 });
 
-export const deleteData = createAsyncThunk('userCrud/deleteData', async (id) => {
-    const response = await axios.delete(`users/${id}`);
+export const updateData = createAsyncThunk('roleCrud/updateData', async ({ id, roleData }) => {
+    const response = await axios.put(`${BASE_URL}/${id}`, roleData);
+    console.log("updateData response: ", roleData.role);
     return response.data;
 });
 
-export const updateData = createAsyncThunk('userCrud/updateData', async ({ id, userData }) => {
-    const response = await axios.put(`users/${id}`, userData);
-    console.log("updateData response: ", userData.username);
-    return response.data;
-});
-
-export const userSlice = createSlice({
-    name: "user",
+export const roleSlice = createSlice({
+    name: "role",
     initialState: {
-        users: [],
+        roles: [],
         loading: false,
         error: null,
         status: 'idle'
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getUsers.pending, (state) => {
+            .addCase(getRoles.pending, (state) => {
                 state.loading = true;
                 state.status = 'loading';
             })
-            .addCase(getUsers.fulfilled, (state, action) => {
+            .addCase(getRoles.fulfilled, (state, action) => {
                 state.loading = false;
                 state.status = 'succeeded';
-                state.users = action.payload;
+                state.roles = action.payload;
             })
-            .addCase(getUsers.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-                state.status = 'failed';
-            })
-
-
-            .addCase(getUserById.pending, (state) => {
-                state.loading = true;
-                state.status = 'loading';
-            })
-            .addCase(getUserById.fulfilled, (state, action) => {
-                state.loading = false;
-                state.status = 'succeeded';
-                state.users = action.payload;
-            })
-            .addCase(getUserById.rejected, (state, action) => {
+            .addCase(getRoles.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
                 state.status = 'failed';
@@ -76,7 +57,7 @@ export const userSlice = createSlice({
             .addCase(addData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.loading = false;
-                state.users.push(action.payload);
+                state.roles.push(action.payload);
             })
             .addCase(addData.rejected, (state, action) => {
                 state.status = 'failed';
@@ -92,7 +73,7 @@ export const userSlice = createSlice({
             .addCase(deleteData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.loading = false;
-                state.users = state.users.filter((user) => user.id !== action.payload.id);
+                state.roles = state.roles.filter((role) => role.id !== action.payload.id);
             })
             .addCase(deleteData.rejected, (state, action) => {
                 state.status = 'failed';
@@ -108,7 +89,7 @@ export const userSlice = createSlice({
             .addCase(updateData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.loading = false;
-                state.users = state.users.map((user) => user.id === action.payload.id ? action.payload : user);
+                state.roles = state.roles.map((role) => role.id === action.payload.id ? action.payload : role);
             })
             .addCase(updateData.rejected, (state, action) => {
                 state.status = 'failed';
@@ -116,6 +97,6 @@ export const userSlice = createSlice({
                 state.error = action.error.message;
             })
     }
-});
+})
 
-export default userSlice.reducer;
+export default roleSlice.reducer;

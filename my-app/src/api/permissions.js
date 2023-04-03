@@ -5,5 +5,8 @@ export const allPermissions = [
     "settings",
     "users",
     "addUser",
-    "editUser"
+    "editUser",
+    "roles",
+    "addRole",
+    "editRole"
 ];

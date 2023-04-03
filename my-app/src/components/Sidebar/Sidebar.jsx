@@ -3,16 +3,28 @@ import navLinks from "../../assets/dummy-data/navLinks";
 import "../Sidebar/sidebar.css";
 import { useNavigate } from 'react-router-dom';
 import routes from "../../routesList";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getRoles } from "../../redux/features/crud/roleSlice";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("role");
     navigate('/login');
   };
 
-  const userPermissions = JSON.parse(localStorage.getItem('permmissions'));
+  const dispatch = useDispatch();
+  const {roles} = useSelector((state)=>(state.role));
+
+  useEffect(()=>{
+    dispatch(getRoles());
+  },[dispatch])
+
+  const role = JSON.parse(localStorage.getItem('role'));
+  const getPermmissions = roles.find((item) => item.name.toLowerCase() === role.toLowerCase());
 
   return (
     <div className="sidebar">
@@ -24,11 +36,11 @@ const Sidebar = () => {
           <ul className='nav__list'>
             {
               routes.map((route, index) => {
-                if (userPermissions.includes(route?.permissions) || route?.permissions === "all") {
+                if (getPermmissions?.permmissions?.includes(route?.permissions) || route?.permissions === "all") {
                   return (
                     <li key={index} className="nav__item">
                       <NavLink to={route.path} className={(navClass) => navClass.isActive ? "nav__active nav__link" : "nav__link"}>
-                        {route.permissions !== "addUser" && route.permissions !== "editUser" &&  route.name}
+                        {route.permissions !== "addUser" && route.permissions !== "addRole" && role && route.permissions !== "editUser" && route.permissions !== "editRole" &&  route.name}
                       </NavLink>
                     </li>
                   )

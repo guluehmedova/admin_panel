@@ -165,3 +165,9 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+.nav__item{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

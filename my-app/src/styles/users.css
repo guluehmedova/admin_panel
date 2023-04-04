@@ -189,3 +189,7 @@ tr:nth-child(even) {
 .title{
     color: whitesmoke;
 }
+
+*{
+    text-transform: none;
+}

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRoles } from "../../redux/features/crud/roleSlice";
 import UserList from '../users/UserList';
+import CarList from '../cars/CarList';
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Router = () => {
                     />
                 }
             })}
-            <Route path='/users' element={<UserList/>}/>
+            <Route path='/cars' element={<CarList/>}/>
         </Routes>
     )
 }

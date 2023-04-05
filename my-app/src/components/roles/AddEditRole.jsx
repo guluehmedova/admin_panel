@@ -63,12 +63,12 @@ const AddEditRole = () => {
           value={item}
           checked={roleData.permmissions.some(p => p === item)}
           name="permmissions"
-          id="flexCheckDefault"
+          id={`flexCheckDefault${index}`}
           onChange={onCheckboxChange}
         />
         <label
           className="lab"
-          htmlFor="flexCheckDefault"
+          htmlFor={`flexCheckDefault${index}`}
         >{item}</label>
       </div>
     );

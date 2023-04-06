@@ -184,3 +184,6 @@ h6 {
   gap: 1rem;
   padding: .2rem;
 }
+.car-img{
+  filter: contrast(150%);
+}

@@ -18,9 +18,8 @@ export const deleteData = createAsyncThunk('carCrud/deleteData', async (id) => {
     return response.data;
 });
 
-export const updateData = createAsyncThunk('carCrud/updateData', async ({ id, roleData }) => {
-    const response = await axios.put(`${BASE_URL}/${id}`, roleData);
-    console.log("updateData response: ", roleData.role);
+export const updateData = createAsyncThunk('carCrud/updateData', async ({ id, carData }) => {
+    const response = await axios.put(`${BASE_URL}/${id}`, carData);
     return response.data;
 });
 

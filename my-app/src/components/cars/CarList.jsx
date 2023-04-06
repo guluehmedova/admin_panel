@@ -7,21 +7,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import MyCustomImageEditingComponent from './MyCustomImageEditingComponent';
 import { getCars, deleteData, updateData } from '../../redux/features/crud/carSlice';
 import ImageUpload from './ImageUpload';
+import { Link } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 
 let inStockDateFilter;
 
 const CarList = () => {
   const { cars } = useSelector((state) => ({ ...state.car }));
+  const { loading } = useSelector((state) => ({ ...state.car }));
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCars());
   }, [dispatch])
-
-  // function imageFormatter(cell) {
-  //   return <img onClick={imageInput} className='car-img' src={cell} alt='photo' />;
-  // }
 
   function imageInput() {
     return <input type="file" />
@@ -80,7 +79,7 @@ const CarList = () => {
       },
       editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
         console.log('value: ', value),
-        <ImageUpload image={ value } />
+        <ImageUpload image={value} />
       ),
       editorClasses: (cell, row, rowIndex, colIndex) => {
         console.log('updated');
@@ -121,18 +120,30 @@ const CarList = () => {
 
   return (
     <div className='container'>
-      <BootstrapTable keyField='id'
-        data={JSON.parse(JSON.stringify(cars))}
-        columns={columns}
-        selectRow={selectRow}
-        filter={filterFactory()}
-        cellEdit={cellEditFactory({
-          mode: 'dbclick',
-          blurToSave: true,
-          afterSaveCell,
-        })} condensed
-        pagination={paginationFactory()}
-      />
+      <div className="carlist">
+        {
+          loading ? <ClipLoader
+            color="white"
+            loading={loading}
+            size={50}
+          /> : <>
+            <h2 className='carlist-title'>Cars List</h2>
+            <Link to='/addCar' className='create-btn'>Create</Link>
+            <BootstrapTable keyField='id'
+              data={JSON.parse(JSON.stringify(cars))}
+              columns={columns}
+              selectRow={selectRow}
+              filter={filterFactory()}
+              cellEdit={cellEditFactory({
+                mode: 'dbclick',
+                blurToSave: true,
+                afterSaveCell,
+              })} condensed
+              pagination={paginationFactory()}
+            />
+          </>
+        }
+      </div>
     </div>
   )
 }

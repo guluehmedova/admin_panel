@@ -46,34 +46,34 @@ img {
   margin-top: 2rem;
   font-weight: 500;
 }
-option{
+option {
   background-color: #0b0c28;
   color: whitesmoke;
-  margin: .2rem 0;
-  padding: .5rem;
+  margin: 0.2rem 0;
+  padding: 0.5rem;
   font-size: 1.5rem;
 }
-select{
+select {
   background-color: #181b3a;
 }
-.lab{
+.lab {
   font-size: 1.5rem;
   color: whitesmoke;
 }
-.per{
+.per {
   display: flex;
   align-items: center;
 }
-.form-check-input{
+.form-check-input {
   width: 10rem;
   background-color: white;
 }
-.role-name{
+.role-name {
   text-transform: capitalize;
 }
 
-.role{
-  margin-top: .3rem;
+.role {
+  margin-top: 0.3rem;
   color: whitesmoke;
 }
 
@@ -166,24 +166,40 @@ h6 {
   isolation: isolate;
 }
 
-.nav__item{
+.nav__item {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.page-link{
+.page-link {
   color: white;
 }
-.filter-label{
+.filter-label {
   margin-top: 2rem;
   border: #01d293 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: .2rem;
+  padding: 0.2rem;
 }
-.car-img{
+.car-img {
   filter: contrast(150%);
+}
+.carlist {
+  width: 100%;
+  background-color: var(--primary-color);
+  height: auto;
+  padding: 2rem 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.carlist-title{
+  color: whitesmoke;
+  font-weight: 900;
+  margin: 2rem 0;
 }

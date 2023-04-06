@@ -38,7 +38,7 @@ tr:nth-child(even) {
     margin-bottom: 2rem;
     color: whitesmoke;
 }
-.user-list .create-btn {
+.create-btn {
     width: auto;
     text-decoration: none;
     background: var(--secondary-color);

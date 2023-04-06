@@ -50,7 +50,7 @@ const AddUser = () => {
   }, [dispatch]);
 
   return (
-    <div className='container'>
+    <div className='container'> 
       <div className="create-form-box">
         <h3 className='stats__title'>{id ? "Edit User Page" : "Create User Page"}</h3>
         <form onSubmit={handleSubmit}>

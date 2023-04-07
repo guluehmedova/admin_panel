@@ -18,8 +18,9 @@ const AddCar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var moment = require('moment');
-    const carCreatedDate = moment().format('LLLL');
+    const moment = require('moment');
+    let carCreatedDate = moment().format('LLLL');
+    console.log(carCreatedDate)
     await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, updatedAt: carCreatedDate, image: carData.image.slice(12) }));
     handleClear();
     navigate('/cars');

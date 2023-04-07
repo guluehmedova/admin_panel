@@ -22,10 +22,6 @@ const CarList = () => {
     dispatch(getCars());
   }, [dispatch])
 
-  function imageInput() {
-    return <input type="file" />
-  }
-
   const columns = [
     {
       dataField: 'id',
@@ -78,11 +74,11 @@ const CarList = () => {
         color: 'white'
       },
       editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
-        console.log('value: ', value),
-        <ImageUpload image={value} />
+        console.log("editorRenderer value: ", row.image),
+        <ImageUpload />
       ),
       editorClasses: (cell, row, rowIndex, colIndex) => {
-        console.log('updated');
+        console.log(cell);
       }
     }, {
       dataField: "remove",
@@ -110,6 +106,7 @@ const CarList = () => {
   };
 
   function afterSaveCell(oldValue, newValue, carData) {
+    console.log("carData: ", carData);
     dispatch(updateData({ id: carData.id, carData: carData }))
   }
 

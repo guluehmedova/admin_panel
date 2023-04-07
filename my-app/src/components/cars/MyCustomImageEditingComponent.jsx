@@ -3,7 +3,7 @@ const MyCustomImageEditingComponent = ({imageFormatter, image}) => {
 
     return (
         <div>
-           <img src={image} alt="" />
+           <img src={`/images/${image}`} alt="" />
         </div>
     )
 }

@@ -198,8 +198,14 @@ h6 {
   align-items: center;
   justify-content: center;
 }
-.carlist-title{
+.carlist-title {
   color: whitesmoke;
   font-weight: 900;
   margin: 2rem 0;
+}
+
+.react-bootstrap-table-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

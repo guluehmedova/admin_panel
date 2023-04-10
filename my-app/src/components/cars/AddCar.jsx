@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addData, updateData } from '../../redux/features/crud/carSlice';
-import moment from 'react-moment';
+import DatePicker from "react-datepicker";
+import moment from 'moment'
 
 const AddCar = () => {
   const [carData, setCarData] = useState({
@@ -10,7 +11,8 @@ const AddCar = () => {
     image: "",
     createdAt: 0,
     price: 0,
-    updatedAt: 0
+    updatedAt: 0,
+    carCreatedDate: new Date()
   });
 
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const AddCar = () => {
     const moment = require('moment');
     let carCreatedDate = moment().format('LLLL');
     console.log(carCreatedDate)
-    await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, updatedAt: carCreatedDate, image: carData.image.slice(12) }));
+    await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, carCreatedDate: carData.carCreatedDate, updatedAt: carCreatedDate, image: carData.image.slice(12) }));
     handleClear();
     navigate('/cars');
   };
@@ -43,6 +45,15 @@ const AddCar = () => {
           <input type="text" name="name" value={carData.name} onChange={onInputChange} placeholder='Name' required />
           <input type="file" name="image" value={carData.image} onChange={onInputChange} required />
           <input type="number" name="price" min="10" value={carData.price} onChange={onInputChange} placeholder='Price' />
+          <DatePicker
+            closeOnScroll={true}
+            isClearable
+            format="dd-mm-yyyy"
+            name="carCreatedDate"
+            value={carData.carCreatedDate}
+            onChange={(date) => setCarData({ ...carData, carCreatedDate: date })}
+            selected={carData.carCreatedDate}
+          />
           <button type='submit'>Save</button>
         </form>
         <Link className='go-back-btn' to="/cars">Go Back</Link>

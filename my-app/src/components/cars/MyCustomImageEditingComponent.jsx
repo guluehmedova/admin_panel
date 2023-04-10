@@ -1,9 +1,9 @@
 
-const MyCustomImageEditingComponent = ({imageFormatter, image}) => {
+const MyCustomImageEditingComponent = (props) => {
 
     return (
         <div>
-           <img src={`/images/${image}`} alt="" />
+           <img src={`/images/${props.image}`} alt="" />
         </div>
     )
 }

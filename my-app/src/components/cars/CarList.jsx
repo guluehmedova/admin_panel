@@ -60,12 +60,7 @@ const CarList = () => {
       headerStyle: {
         color: 'white'
       },
-      editable: false,
-      filter: dateFilter({
-        getFilter: (filter) => {
-          inStockDateFilter = filter;
-        }
-      })
+      editable: false
     }, {
       dataField: 'image',
       text: 'image',
@@ -75,10 +70,16 @@ const CarList = () => {
       },
       editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
         console.log("editorRenderer value: ", row.image),
-        <ImageUpload />
+        <ImageUpload value={value} {...editorProps}/>
       ),
       editorClasses: (cell, row, rowIndex, colIndex) => {
-        console.log(cell);
+        console.log("updated");
+      }
+    }, {
+      dataField: 'carCreatedDate',
+      text: 'Car Year',
+      headerStyle: {
+        color: 'white'
       }
     }, {
       dataField: "remove",
@@ -107,7 +108,7 @@ const CarList = () => {
 
   function afterSaveCell(oldValue, newValue, carData) {
     console.log("carData: ", carData);
-    dispatch(updateData({ id: carData.id, carData: carData }))
+    dispatch(updateData({ id: carData?.id, carData: carData }))
   }
 
   const selectRow = {

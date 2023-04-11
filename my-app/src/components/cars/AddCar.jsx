@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addData, updateData } from '../../redux/features/crud/carSlice';
 import DatePicker from "react-datepicker";
-import moment from 'moment'
+import moment from 'moment';
 
 const AddCar = () => {
   const [carData, setCarData] = useState({
@@ -22,8 +22,7 @@ const AddCar = () => {
     e.preventDefault();
     const moment = require('moment');
     let carCreatedDate = moment().format('LLLL');
-    console.log(carCreatedDate)
-    await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, carCreatedDate: carData.carCreatedDate, updatedAt: carCreatedDate, image: carData.image.slice(12) }));
+    await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, carCreatedDate: carData.carCreatedDate, image: carData.image.slice(12) }));
     handleClear();
     navigate('/cars');
   };
@@ -42,12 +41,13 @@ const AddCar = () => {
       <div className="create-form-box">
         <h3 className='stats__title'>Create Car Page</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" name="name" value={carData.name} onChange={onInputChange} placeholder='Name' required />
-          <input type="file" name="image" value={carData.image} onChange={onInputChange} required />
-          <input type="number" name="price" min="10" value={carData.price} onChange={onInputChange} placeholder='Price' />
+          <input className="car-input" type="text" pattern="^[a-zA-Z]+$" name="name" value={carData.name} onChange={onInputChange} placeholder='Name' required />
+          <input className="car-input" type="file" pattern="^[0-9]+$" name="image" value={carData.image} onChange={onInputChange} required />
+          <input className="car-input" type="number" pattern="[0-9]" name="price" min="10" value={carData.price} onChange={onInputChange} placeholder='Price' required />
           <DatePicker
             closeOnScroll={true}
             isClearable
+            required
             format="dd-mm-yyyy"
             name="carCreatedDate"
             value={carData.carCreatedDate}

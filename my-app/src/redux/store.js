@@ -5,22 +5,29 @@ import roleReducer from './features/crud/roleSlice';
 import carReducer from './features/crud/carSlice';
 
 import storage from 'redux-persist/lib/storage';
+import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
 
-const persistConfigure = {
+const reducers = combineReducers({
+    auth: authReducer,
+    user: userReducer,
+    role: roleReducer,
+    car: carReducer
+});
+
+const persistConfig = {
     key: 'root',
-    storage
+    storage,
+    version: 1,
+    whitelist: ["car"]
 };
 
-const persistedReducer = persistReducer(persistConfigure, carReducer);
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        user: userReducer,
-        role: roleReducer,
-        car: persistedReducer
-    }
+    reducer: persistedReducer,
+    middleware: [thunk]
 });
 
 export default store;

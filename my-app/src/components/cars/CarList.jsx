@@ -9,6 +9,7 @@ import { getCars, deleteData, updateData } from '../../redux/features/crud/carSl
 import ImageUpload from './ImageUpload';
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
+import { useState } from 'react';
 
 let inStockDateFilter;
 
@@ -20,6 +21,8 @@ const CarList = () => {
 
   useEffect(() => {
     dispatch(getCars());
+    const moment = require('moment');
+    let carUpdatedAt = moment().format('LLLL');
   }, [dispatch])
 
   const columns = [
@@ -70,7 +73,7 @@ const CarList = () => {
       },
       editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
         console.log("editorRenderer value: ", row.image),
-        <ImageUpload value={value} {...editorProps}/>
+        <ImageUpload value={value} {...editorProps} />
       ),
       editorClasses: (cell, row, rowIndex, colIndex) => {
         console.log("updated");
@@ -107,8 +110,12 @@ const CarList = () => {
   };
 
   function afterSaveCell(oldValue, newValue, carData) {
-    console.log("carData: ", carData);
-    dispatch(updateData({ id: carData?.id, carData: carData }))
+    console.log('oldValue: ', oldValue);
+    console.log('newValue: ', newValue);
+    console.log('carData: ', carData.updatedAt);
+    const moment = require('moment');
+    let carUpdatedDate = moment().format('LLLL');
+    dispatch(updateData({ id: carData?.id, carData: {...carData, updatedAt: carUpdatedDate }}));
   }
 
   const selectRow = {
@@ -146,4 +153,4 @@ const CarList = () => {
   )
 }
 
-export default CarList
+export default CarList;

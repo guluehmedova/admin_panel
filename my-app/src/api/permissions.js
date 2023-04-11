@@ -8,5 +8,7 @@ export const allPermissions = [
     "editUser",
     "roles",
     "addRole",
-    "editRole"
+    "editRole",
+    "cars",
+    "addCar"
 ];

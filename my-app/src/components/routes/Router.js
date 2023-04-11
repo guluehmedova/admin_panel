@@ -25,8 +25,6 @@ const Router = () => {
                     />
                 }
             })}
-            <Route path='/cars' element={<CarList/>}/>
-            <Route path='/addCar' element={<AddCar/>}/>
         </Routes>
     )
 }

@@ -10,6 +10,7 @@ import ImageUpload from './ImageUpload';
 import { Link } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from 'react';
+import moment from 'moment';
 
 let inStockDateFilter;
 
@@ -83,6 +84,13 @@ const CarList = () => {
       text: 'Car Year',
       headerStyle: {
         color: 'white'
+      },
+      formatter: (cell) => {
+        let carYear = cell;
+        if (typeof cell !== 'object') {
+          carYear = new Date(cell);
+        }
+        return moment(carYear).format('L');
       }
     }, {
       dataField: "remove",
@@ -114,8 +122,8 @@ const CarList = () => {
     console.log('newValue: ', newValue);
     console.log('carData: ', carData.updatedAt);
     const moment = require('moment');
-    let carUpdatedDate = moment().format('LLLL');
-    dispatch(updateData({ id: carData?.id, carData: {...carData, updatedAt: carUpdatedDate }}));
+    let carUpdatedDate = moment().format('LLL');
+    dispatch(updateData({ id: carData?.id, carData: { ...carData, updatedAt: carUpdatedDate } }));
   }
 
   const selectRow = {

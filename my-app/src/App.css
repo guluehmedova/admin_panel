@@ -217,6 +217,7 @@ h6 {
 
 .card-img-top{
   filter: contrast(150%);
-  width: 90%;
-  height: 100%;
+  width: 80%;
+  margin: auto;
+  height:80%;
 }

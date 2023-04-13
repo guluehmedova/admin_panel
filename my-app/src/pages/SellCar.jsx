@@ -1,14 +1,26 @@
-import React from 'react'
+import { useEffect } from "react";
+import CarCard from "../components/CarCard"
+import { useDispatch, useSelector } from "react-redux";
+import ClipLoader from "react-spinners/ClipLoader";
+import { getCars } from '../redux/features/crud/carSlice';
 
 const SellCar = () => {
+  const { cars } = useSelector((state) => ({ ...state.car }));
+  const { loading } = useSelector((state) => ({ ...state.car }));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, [dispatch])
+
+  const carCards = cars.map((car, index) => {
+    return <CarCard key={index} {...car}/>
+  });
+
   return (
     <div className='container'>
-      <div className="row">
-        <h1>Sell Car</h1>
-        <p>Lorem ipsum dolor sit amet consectetu
-          adipisicing elit. Harum quo in porro, provident laborum
-          nesciunt minima possimus tempora sunt molestias nostrum aliquam nam ipsum nulla labore maxime nisi iusto amet?</p>
-      </div>
+      {carCards}
     </div>
   )
 }

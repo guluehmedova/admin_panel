@@ -214,3 +214,9 @@ h6 {
 .carlist{
   overflow-x:scroll;
 }
+
+.card-img-top{
+  filter: contrast(150%);
+  width: 90%;
+  height: 100%;
+}

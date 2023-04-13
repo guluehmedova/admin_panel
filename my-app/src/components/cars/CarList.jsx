@@ -22,8 +22,6 @@ const CarList = () => {
 
   useEffect(() => {
     dispatch(getCars());
-    const moment = require('moment');
-    let carUpdatedAt = moment().format('LLLL');
   }, [dispatch])
 
   const columns = [

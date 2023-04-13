@@ -15,12 +15,20 @@ const SellCar = () => {
   }, [dispatch])
 
   const carCards = cars.map((car, index) => {
-    return <CarCard key={index} {...car}/>
+    return <CarCard key={index} {...car} />
   });
 
   return (
     <div className='container'>
-      {carCards}
+      <div className="sellCar">
+        {
+          loading ? <ClipLoader
+            color="white"
+            loading={loading}
+            size={50}
+          /> : carCards
+        }
+      </div>
     </div>
   )
 }

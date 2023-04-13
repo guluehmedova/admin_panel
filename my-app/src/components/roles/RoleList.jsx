@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRoles , deleteData} from '../../redux/features/crud/roleSlice';
+import { getRoles, deleteData } from '../../redux/features/crud/roleSlice';
 import { Link } from 'react-router-dom';
 
 const RoleList = () => {
@@ -21,7 +21,7 @@ const RoleList = () => {
   return (
     <div className='container'>
       <div className="role-list">
-      <h3 className='title'>Role List</h3>
+        <h3 className='title'>Role List</h3>
         <Link to='/addRole' className='create-btn'>Create</Link>
         <table>
           <thead>
@@ -37,7 +37,7 @@ const RoleList = () => {
               <tr key={index}>
                 <td>{no++}</td>
                 <td>{role.name}</td>
-                <td>{role.permmissions?.map((item) => item && item + ' , ')}</td>
+                <td>{role.permmissions?.join(', ')}</td>
                 <td>
                   <Link className='edit-btn' to={`/editRole/${role.id}`}>Edit</Link>
                   <button className='delete-btn' onClick={() => handleDelete(role.id)}>Delete</button>

@@ -43,6 +43,25 @@ const CarList = () => {
       text: 'Car Price',
       headerStyle: {
         color: 'white'
+      },
+      validator: (newValue, row, column) => {
+        console.log("newValue: ", newValue);
+        console.log("column: ", column);
+        console.log("row: ", row);
+        console.log("newValue type: ", typeof (parseInt(newValue)));
+        const parsenewValue = parseInt(newValue);
+        const regex = new RegExp('^([5-9]\d{1}\d*|\d{3}\d*)$');
+        console.log('regex: ', regex.test(parsenewValue));
+        if (parsenewValue >= 20) {
+          return {
+            valid: true,
+          };
+        } else {
+          return {
+            valid: false,
+            message: 'The Price have to be greater than 20'
+          };
+        }
       }
     }, {
       dataField: 'createdAt',
@@ -116,9 +135,9 @@ const CarList = () => {
   };
 
   function afterSaveCell(oldValue, newValue, carData) {
-    console.log('oldValue: ', oldValue);
-    console.log('newValue: ', newValue);
-    console.log('carData: ', carData.updatedAt);
+    // console.log('oldValue: ', oldValue);
+    // console.log('newValue: ', newValue);
+    // console.log('carData: ', carData.updatedAt);
     const moment = require('moment');
     let carUpdatedDate = moment().format('LLL');
     dispatch(updateData({ id: carData?.id, carData: { ...carData, updatedAt: carUpdatedDate } }));
@@ -148,7 +167,7 @@ const CarList = () => {
               cellEdit={cellEditFactory({
                 mode: 'dbclick',
                 blurToSave: true,
-                afterSaveCell,
+                afterSaveCell
               })} condensed
               pagination={paginationFactory()}
             />

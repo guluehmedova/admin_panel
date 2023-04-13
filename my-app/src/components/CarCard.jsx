@@ -5,7 +5,7 @@ import {
 import moment from 'moment';
 
 
-const CarCard = ({name, image, price , carCreatedDate}) => {
+const CarCard = ({ name, image, price, carCreatedDate }) => {
     return (
         <div>
             <Card className='mb-5'>

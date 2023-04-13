@@ -221,3 +221,27 @@ h6 {
   margin: auto;
   height:80%;
 }
+
+.sellCar{
+  text-align: center;
+}
+.card-title{
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.card-subtitle{
+  font-size: 1.5rem;
+
+}
+
+.card-subtitle strong{
+  background-color: green;
+  color: whitesmoke;
+  border-radius: 50px;
+  padding: .2rem;
+}
+
+.card-text{
+  font-size: 1.6rem;
+}

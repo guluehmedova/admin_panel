@@ -10,8 +10,8 @@ const AddCar = () => {
   const { name, image, price, carCreatedDate } = useSelector((state) => ({ ...state.carCreateForm }));
 
   const [carData, setCarData] = useState({
-    name: name ? name : '',
-    image: "", 
+    name: name ? name : "",
+    image: "",
     createdAt: 0,
     price: price ? price : 0,
     updatedAt: 0,

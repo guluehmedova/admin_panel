@@ -7,21 +7,21 @@ import DatePicker from "react-datepicker";
 import moment from 'moment';
 
 const AddCar = () => {
+  const { name, image, price, carCreatedDate } = useSelector((state) => ({ ...state.carCreateForm }));
+
   const [carData, setCarData] = useState({
-    name: '',
-    image: "",
+    name: name ? name : '',
+    image: "", 
     createdAt: 0,
-    price: 0,
+    price: price ? price : 0,
     updatedAt: 0,
     carCreatedDate: new Date()
   });
 
-  const { name, image, price, carCreatedDate } = useSelector((state) => ({ ...state.carCreateForm }));
-
-  console.log('name: ', name);
-  console.log('image: ', image);
-  console.log('price: ', price);
-  console.log('carCreatedDate: ', carCreatedDate);
+  // console.log('name: ', name);
+  // console.log('image: ', image);
+  // console.log('price: ', price);
+  // console.log('carCreatedDate: ', carCreatedDate);
 
   const [error, setError] = useState(false);
 
@@ -33,13 +33,13 @@ const AddCar = () => {
     const moment = require('moment');
     let carCreatedDate = moment().format('L');
     await dispatch(addData({ name: carData.name, createdAt: carCreatedDate, price: carData.price, updatedAt: carCreatedDate, carCreatedDate: carData.carCreatedDate, image: carData.image.slice(12) }));
-    await dispatch(deleteCar());
     handleClear();
     navigate('/cars');
   };
 
   const handleClear = () => {
     setCarData({ name: "", price: 0, image: "" });
+    dispatch(deleteCar());
     setError(false);
   };
 
@@ -57,7 +57,7 @@ const AddCar = () => {
       <div className="create-form-box">
         <h3 className='stats__title'>Create Car Page</h3>
         <form onSubmit={handleSubmit}>
-          <input className="car-input" type="text" pattern="([A-z0-9À-ž\s]){2,}" name="name" value={name} onChange={onInputChange} placeholder='Name' required />
+          <input className="car-input" type="text" pattern="([A-z0-9À-ž\s]){2,}" name="name" value={carData.name} onChange={onInputChange} placeholder='Name' required />
           <input className="car-input" type="file" pattern="^[0-9]+$" name="image" value={carData.image} onChange={onInputChange} required />
           <input className="car-input" type="number" pattern="[0-9]" name="price" min='20' value={carData.price} onChange={onInputChange} placeholder='Price' required />
           <DatePicker

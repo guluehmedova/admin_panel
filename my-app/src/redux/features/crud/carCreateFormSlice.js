@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-        name: '',
-        image: "",
-        price: 0,
-        carCreatedDate: new Date()
+    name: '',
+    image: "",
+    price: 0,
+    carCreatedDate: new Date(),
 };
 
 export const carCreateForm = createSlice({
@@ -19,7 +19,7 @@ export const carCreateForm = createSlice({
                 state.carCreatedDate = action.payload.carCreatedDate;
             }
         },
-        deleteCar: (state, action)=>{
+        deleteCar: (state, action) => {
             state.name = '';
             state.price = 0;
             state.image = '';
@@ -28,5 +28,5 @@ export const carCreateForm = createSlice({
     }
 });
 
-export const { addCar , deleteCar} = carCreateForm.actions;
+export const { addCar, deleteCar } = carCreateForm.actions;
 export default carCreateForm.reducer;

@@ -1,2 +1,2 @@
-https://cheerful-duckanoo-f4af6b.netlify.app
+https://silver-kheer-50f6aa.netlify.app
 

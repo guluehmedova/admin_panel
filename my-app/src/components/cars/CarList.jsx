@@ -37,7 +37,22 @@ const CarList = () => {
       headerStyle: {
         color: 'white'
       },
-      filter: textFilter()
+      filter: textFilter(),
+      validator: (newValue, row, column) => {
+        console.log("Car Name newValue: ", newValue);
+        console.log("column: ", column);
+        console.log("row: ", row);
+        if (newValue.length > 1) {
+          return {
+            valid: true,
+          };
+        } else {
+          return {
+            valid: false,
+            message: 'The Car Name length at least have to be greater than 1'
+          };
+        }
+      }
     }, {
       dataField: 'price',
       text: 'Car Price',
@@ -50,8 +65,6 @@ const CarList = () => {
         console.log("row: ", row);
         console.log("newValue type: ", typeof (parseInt(newValue)));
         const parsenewValue = parseInt(newValue);
-        const regex = new RegExp('^([5-9]\d{1}\d*|\d{3}\d*)$');
-        console.log('regex: ', regex.test(parsenewValue));
         if (parsenewValue >= 20) {
           return {
             valid: true,
